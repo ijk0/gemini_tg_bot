@@ -47,8 +47,13 @@ def echo_all(message):
     print(response.text)
     bot.reply_to(message, process_text_with_code(response.text), parse_mode="MarkdownV2")
 
-@bot.message_handler(func=lambda message: is_group_chat(message) and is_user_allowed(message) and is_bot_mentioned(message))
+@bot.message_handler(func=lambda message: 
+                     is_group_chat(message) and 
+                     is_user_allowed(message) and 
+                     (is_bot_mentioned(message) or message.reply_to_message))
 def echo_all_group(message):
+    print(message.user_id)
+    print(message.chat_id)
     print(message.text)
     # model = genai.GenerativeModel('gemini-pro')
     message_text = message.text.replace(f"@{BOT_USERNAME}", "").strip()
