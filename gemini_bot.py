@@ -52,8 +52,8 @@ def echo_all(message):
                      is_user_allowed(message) and 
                      (is_bot_mentioned(message) or message.reply_to_message))
 def echo_all_group(message):
-    print(message.user_id)
-    print(message.chat_id)
+    print(message.from_user.id)
+    print(message.chat.id)
     print(message.text)
     # model = genai.GenerativeModel('gemini-pro')
     message_text = message.text.replace(f"@{BOT_USERNAME}", "").strip()
